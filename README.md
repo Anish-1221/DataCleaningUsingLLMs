@@ -29,7 +29,7 @@ This project focuses on using large language models (LLMs) for error detection a
 
 ## Additional Notes
 - For quicker testing, use a small subset of rows instead of the full dataset.
-- All prompts are included in this document to avoid hunting through the code.
+- All prompts are included in the `README` to avoid hunting through the code.
 - Prompts are designed for structured, JSON-compatible outputs.
 
 ---
