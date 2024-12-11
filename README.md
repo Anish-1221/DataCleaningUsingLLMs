@@ -5,6 +5,41 @@ This project focuses on using large language models (LLMs) for error detection a
 
 ---
 
+## How to Run the Project
+1. Install Dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Pull the neural-chat Model:
+   ```bash
+   ollama pull neural-chat
+   ```
+
+3. Update File Paths:
+   Ensure file paths in the code match your environment.
+
+4. Run Error Detection:
+   Use the error detection prompts (`detector_noMD.py`, `detector_columnMD.py`, `detector_fullMD.py`).
+
+5. Run Error Correction:
+   Use the correction prompt provided in `correct_errors.py`.
+
+---
+
+## Additional Notes
+- For quicker testing, use a small subset of rows instead of the full dataset.
+- All prompts are included in this document to avoid hunting through the code.
+- Prompts are designed for structured, JSON-compatible outputs.
+
+---
+
+## Dependencies
+- Python 3.8+
+- Intel's neural-chat model on Ollama
+
+---
+
 ## Data Description
 ### Dataset Information
 - **Folder Name:** `Test File`
@@ -436,35 +471,4 @@ Prompts provide outputs in JSON format, including corrected fields and explanati
 
 ---
 
-## How to Run the Project
-1. Install Dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
 
-2. Pull the neural-chat Model:
-   ```bash
-   ollama pull neural-chat
-   ```
-
-3. Update File Paths:
-   Ensure file paths in the code match your environment.
-
-4. Run Error Detection:
-   Use the error detection prompts (`detector_noMD.py`, `detector_columnMD.py`, `detector_fullMD.py`).
-
-5. Run Error Correction:
-   Use the correction prompt provided in `correct_errors.py`.
-
----
-
-## Additional Notes
-- For quicker testing, use a small subset of rows instead of the full dataset.
-- All prompts are included in this document to avoid hunting through the code.
-- Prompts are designed for structured, JSON-compatible outputs.
-
----
-
-## Dependencies
-- Python 3.8+
-- Intel's neural-chat model on Ollama
