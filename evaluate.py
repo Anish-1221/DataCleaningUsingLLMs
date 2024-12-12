@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
+import os
 
 # Load data files
 def load_data():
@@ -22,7 +23,7 @@ def load_data():
     with open(corrected_json, "r") as f:
         corrections = json.load(f)
 
-    return errors_df, ground_truth_df, detected_errors, corrected_df, corrections
+    return errors_df, ground_truth_df, detected_errors, corrected_df, corrections, detected_errors_json
 
 # Calculate detection performance
 def evaluate_detection(detected_errors, ground_truth_df):
@@ -49,9 +50,21 @@ def evaluate_correction(corrected_df, ground_truth_df):
 
     return accuracy
 
+# Save results to a CSV file
+def save_results_to_csv(results, detected_errors_json):
+    # Determine output file name based on detected_errors_json file name
+    base_name = os.path.splitext(os.path.basename(detected_errors_json))[0]
+    output_csv = f"{base_name}_results.csv"
+
+    # Convert results to DataFrame and save as CSV
+    results_df = pd.DataFrame([results])
+    results_df.to_csv(output_csv, index=False)
+
+    print(f"Results saved to {output_csv}")
+
 # Main evaluation function
 def evaluate_model():
-    errors_df, ground_truth_df, detected_errors, corrected_df, corrections = load_data()
+    errors_df, ground_truth_df, detected_errors, corrected_df, corrections, detected_errors_json = load_data()
 
     print("Evaluating error detection performance...")
     precision, recall, f1, accuracy = evaluate_detection(detected_errors, ground_truth_df)
@@ -63,6 +76,16 @@ def evaluate_model():
     print("\nEvaluating error correction performance...")
     correction_accuracy = evaluate_correction(corrected_df, ground_truth_df)
     print(f"Correction Accuracy: {correction_accuracy:.2f}")
+
+    # Save results
+    results = {
+        "Detection Precision": precision,
+        "Detection Recall": recall,
+        "Detection F1 Score": f1,
+        "Detection Accuracy": accuracy,
+        "Correction Accuracy": correction_accuracy
+    }
+    save_results_to_csv(results, detected_errors_json)
 
 if __name__ == "__main__":
     evaluate_model()
