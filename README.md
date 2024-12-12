@@ -25,6 +25,9 @@ This project focuses on using large language models (LLMs) for error detection a
 5. Run Error Correction:
    Use the correction prompt provided in `correct_errors.py`.
 
+6. Run Evaluation Script:
+   Use the `evaluate.py` script with correct file paths to obtain performance metrics.
+
 ---
 
 ## Additional Notes
@@ -471,4 +474,19 @@ Prompts provide outputs in JSON format, including corrected fields and explanati
 
 ---
 
+## Evaluate Error Detection and Correction
 
+### How to Use `evaluate.py`
+1. Ensure the paths to the required files (`errors_csv`, `ground_truth_csv`, `detected_errors_json`, `corrected_csv`, `corrected_json`) are correctly updated in the script based on your generated metadata files.
+2. Run the script:
+   ```bash
+   python evaluate.py
+   ```
+3. Results are automatically saved in a CSV file. The output file name is based on the name of the `detected_errors_json` file:
+   - If the file is `fullMD_10pct.json`, the results are saved as `fullMD_results.csv`.
+   - If the file is `columnMD_10pct.json`, the results are saved as `columnMD_results.csv`.
+   - Similarly for other files.
+
+### Notes
+- Update file paths accordingly to point to the correct metadata files.
+- Ensure the dataset size matches the ground truth and corrections data for accurate evaluation.
